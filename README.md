@@ -13,22 +13,22 @@
   
 2. DramaQA 데이터셋을 다운로드 받아서 아래와 같이 디렉토리를  준비해주세요,
 ``` 
-	  LBA-DramaQG/
-	      dataset.py
-	      dataset_post.py
-	      train.py
-	      train_post.py
-	      generate.py
-	      generate_LBA.py
-	      preprocess.py   
-	      T5.py 
-	      requirements.txt
-	      
-	      DramaQA/
-		      AnotherMissOhQA_test_set.json  
-		      AnotherMissOhQA_train_set.json  
-		      AnotherMissOhQA_val_set.json  
-		      AnotherMissOh_script.json
+LBA-DramaQG/
+	dataset.py
+	dataset_post.py
+	train.py
+	train_post.py
+	generate.py
+	generate_LBA.py
+	preprocess.py   
+	T5.py 
+	requirements.txt
+
+	DramaQA/
+	      AnotherMissOhQA_test_set.json  
+	      AnotherMissOhQA_train_set.json  
+	      AnotherMissOhQA_val_set.json  
+	      AnotherMissOh_script.json
 ```
 
 3. QG 학습 데이터셋 전처리
