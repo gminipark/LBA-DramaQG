@@ -1,4 +1,5 @@
 
+
 # LBA-DramaQG
 
 ## Question Generation
@@ -54,6 +55,17 @@ python train.py
 python generate_LBA.py
 ```
 
+## Input example 
+```
+[{
+"vid" : AnotherMissOh14_001_0000,
+"False_promise" : "Haeyoung1 and Dokyung are in love and the two went through many things before starting to date."
+}]
+```
+## Output example
+```
+[{'question' : How did Haeyoung1 feel when Haeyoung1 was with Dokyung?}]
+```
 ### Fine-tuned 모델 다운로드
 -  [link](https://drive.google.com/drive/folders/1M7gmjaoY8edl61J-BhbmJzPOLegwsT9s?usp=share_link)
 
