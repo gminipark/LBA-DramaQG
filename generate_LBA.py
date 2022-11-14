@@ -4,6 +4,7 @@ import dataset
 from torch.utils.data import DataLoader
 from tqdm import tqdm
 import os
+import json
 
 # device
 device = 'cuda' if torch.cuda.is_available() else 'cpu'
@@ -40,7 +41,8 @@ dev_dataloader = DataLoader(dev_dataset, batch_size)
 model.load_state_dict(torch.load(model_path))    
 model.eval()
 
-with open(os.path.join(output_path, f'outputs.txt'), 'w', encoding='utf-8') as f:
+with open(os.path.join(output_path, f'outputs.json'), 'w', encoding='utf-8') as f:
+    outputs = []
     for step_index, batch_data in tqdm( enumerate(dev_dataloader), f"[GENERATE]", total=len(dev_dataloader)):
 
         input_ids, decoder_input_ids, labels = tuple(value.to(device) for value in batch_data.values())
@@ -50,4 +52,7 @@ with open(os.path.join(output_path, f'outputs.txt'), 'w', encoding='utf-8') as f
         for o in output:
             o = tokenizer.decode(o, skip_special_tokens=True)
             o = o.replace(' ##', '').replace('##', '').strip()
-            f.write(o+'\n')
+            outputs.append({'question' : o})
+
+
+    json.dump(outputs, f)
