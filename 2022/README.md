@@ -1,4 +1,6 @@
-# LBA-DramaQG 2022 version
+
+
+# LBA-DramaQG
 
 ## Question Generation
 - 불확실성에 대한 질문을 생성하는 모델입니다.
@@ -10,45 +12,63 @@
   pip install -r requirements.txt
   ```
   
-2. DramaQA 이미지 데이터셋을 다운로드 받아서 아래와 같이 디렉토리를  준비해주세요,
+2. DramaQA 데이터셋을 다운로드 받아서 아래와 같이 디렉토리를  준비해주세요,
 ``` 
 LBA-DramaQG/
-	2022
-        dataset.py
-	    image_utils.py
-        utils.py
-	    run_inference.py
-	    generate_LBA.py
-	    requirements.txt
-	    data/
-	        AnotherMissOhQA
-                /AnotherMissOh_images
-                    /AnotherMissOh01
-                        /001
-                        ...
-                    ...
-        blip2-flan-t5-xxl/
-                
+	dataset.py
+	dataset_post.py
+	train.py
+	train_post.py
+	generate.py
+	generate_LBA.py
+	preprocess.py   
+	T5.py 
+	requirements.txt
 
+	DramaQA/
+	      AnotherMissOhQA_test_set.json  
+	      AnotherMissOhQA_train_set.json  
+	      AnotherMissOhQA_val_set.json  
+	      AnotherMissOh_script.json
 ```
-1. Generation
+
+3. QG 학습 데이터셋 전처리
 ```
-python run_inference.py --cache_dir="./blip2-flan-t5-xxl" --image_dir="./data/AnotherMissOh/AnotherMissOh_images/"
+python preprocess.py --directory_path DramaQA
+```
+---
+```
+	DramaQG/
+		post-training.json
+		fine-tuning.json
+```
+4. Post-training
+```
+python post-train.py
+```
+5. Fine-tuning
+```
+python train.py
+```
+6. Generation
+```
+python generate_LBA.py
 ```
 
 ## Input example 
 ```
-[
-    {"question" : "Why did Dokyung go to the old man?",
-     "uncertain_information" : "man",
-     "vid" : "AnotherMissOh17_001_0000"
-    },
-]
+[{
+"vid" : AnotherMissOh14_001_0000,
+"False_promise" : "Haeyoung1 and Dokyung are in love and the two went through many things before starting to date."
+}]
 ```
 ## Output example
 ```
-["What is the man's name?"]
+[{"question" : "How did Haeyoung1 feel when Haeyoung1 was with Dokyung?"}]
 ```
+### Fine-tuned 모델 다운로드
+-  [link](https://drive.google.com/drive/folders/1M7gmjaoY8edl61J-BhbmJzPOLegwsT9s?usp=share_link)
 
  ### Contact
 	  - Gyu-Min Park (pgm1219@khu.ac.kr)
+	  - Seong-Eun Hong (zen152@khu.ac.kr)
