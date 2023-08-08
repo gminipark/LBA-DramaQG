@@ -1,0 +1,57 @@
+import torch
+from torch.utils.data import  Dataset
+
+from PIL import Image
+
+from image_utils import get_image_from_vid
+
+
+class ImageTextGenerationDataset(Dataset):
+    def __init__(self, args, examples, processor):
+        self.args = args
+        self.examples = examples
+        self.processor = processor
+
+    def __len__(self):
+        return len(self.examples)
+
+    def __getitem__(self, idx):
+        item = self.examples[idx]
+        
+        images = get_image_from_vid(self.args.image_dir, item["vid"])
+        
+        input_image = Image.open(images[0])
+        
+        encoding = self.processor(images=input_image, padding="max_length", return_tensors="pt")
+        # remove batch dimension
+        encoding = {k: v.squeeze() for k, v in encoding.items()}
+        
+        question = "Instructions: Given a picture, A question and a correct answer related the picture are provided.\
+        The answer can be inferred from the picture. \
+        The target(object) of question  which is existed in the picture is important key to infer the answer. \
+        The additional information of object related question is helpful for answer the question more correctly. \
+        Therefore, our goal is to get new information related answer by asking a new question. \
+        Write an additional question to help to answer the original question correctly.  \
+        original question: " + item['question'] + " " + \
+        "uncertain information: " + item['uncertain_information'] + " " + \
+        "additional question: "
+        encoding["text"] = question
+        
+        return encoding
+
+
+    def collate_fn(self, batch):
+        # pad the input_ids and attention_mask
+        processed_batch = {}
+        for key in batch[0].keys():
+            if key == "text":
+                text_inputs = self.processor.tokenizer(
+                    [example["text"] for example in batch], padding=True, return_tensors="pt"
+                )
+                processed_batch["input_ids"] = text_inputs["input_ids"]
+                processed_batch["attention_mask"] = text_inputs["attention_mask"]
+            else:
+                processed_batch[key] = torch.stack([example[key] for example in batch])
+        
+        
+        return processed_batch
