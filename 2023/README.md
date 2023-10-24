@@ -13,20 +13,21 @@
 2. DramaQA 이미지 데이터셋을 다운로드 받아서 아래와 같이 디렉토리를  준비해주세요,
 ``` 
 LBA-DramaQG/
-	2022
+    2022
+    2023/
         dataset.py
-	    image_utils.py
+	image_utils.py
         utils.py
-	    run_inference.py
-	    generate_LBA.py
-	    requirements.txt
-	    data/
-	        AnotherMissOhQA
-                /AnotherMissOh_images
-                    /AnotherMissOh01
-                        /001
-                        ...
-                    ...
+	run_inference.py
+	generate_LBA.py
+	requirements.txt
+	data/
+	    AnotherMissOhQA
+  		/AnotherMissOh_images
+		    /AnotherMissOh01
+			/001
+                            ...
+                                ...
         blip2-flan-t5-xxl/
                 
 
