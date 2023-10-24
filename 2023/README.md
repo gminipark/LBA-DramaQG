@@ -1,4 +1,4 @@
-# LBA-DramaQG 2022 version
+# LBA-DramaQG 2023 version
 
 ## Question Generation
 - 불확실성에 대한 질문을 생성하는 모델입니다.
