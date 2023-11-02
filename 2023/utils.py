@@ -1,8 +1,9 @@
 import json
 import torch
 import random
+import ast
 import numpy as np
-from tqdm import tqdm 
+from tqdm import tqdm
 
 
 def set_random_seed(seed):
@@ -69,7 +70,33 @@ def get_subtitles_by_vid(subtitiles_list, vid):
     
     return subtitles
         
+def get_object_name_from_inputs(object_list):
+    
+    ambiguous_entity_list = []
+    for object in object_list:
+        for object_name, label in object.items():
+            if isinstance(object_name,str):
+                object_name = ast.literal_eval(object_name)
+            if str(label) == "False":  
+                if isinstance(object_name,list):
+                    full_object_name = " ".join(object_name)
+                else:
+                    full_object_name = object_name
+                    
+                ambiguous_entity_list.append(full_object_name) 
+                
+    return ambiguous_entity_list   
 
-# subtitiles_list = load_subtitles("./DramaQA/AnotherMissOh_script.json")
-# subtitles = get_subtitles_by_vid(subtitiles_list,"AnotherMissOh01_001_0000")
-# print(subtitles)
+def convert_inputs_to_examples(inputs_list):
+    
+    examples = []
+    for inputs in inputs_list:
+        ambiguous_objects = get_object_name_from_inputs(inputs['uncertain_information'])
+        for object_name in ambiguous_objects:
+            example = {}
+            example['ambiguous_object'] = object_name
+            example['vid'] = inputs['vid']
+            example['question'] = inputs['question']
+            examples.append(example)
+    
+    return examples

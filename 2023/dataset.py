@@ -26,15 +26,15 @@ class ImageTextGenerationDataset(Dataset):
         # remove batch dimension
         encoding = {k: v.squeeze() for k, v in encoding.items()}
         
-        question = "Instructions: Given a picture, A question and a correct answer related the picture are provided.\
-        The answer can be inferred from the picture. \
-        The target(object) of question  which is existed in the picture is important key to infer the answer. \
-        The additional information of object related question is helpful for answer the question more correctly. \
-        Therefore, our goal is to get new information related answer by asking a new question. \
-        Write an additional question to help to answer the original question correctly.  \
-        original question: " + item['question'] + " " + \
-        "uncertain information: " + item['uncertain_information'] + " " + \
-        "additional question: "
+        question = "Instructions: Given a picture, a question and a ambiguous entity of the question are provided.\
+        An answer can not be inferred by the ambiguous entity. \
+        The ambiguous entity(object) of question  which is existed in the picture is important key to infer the answer. \
+        The additional information of the ambiguous entity  is helpful for answer the question more correctly. \
+        Therefore, our goal is to get new information about the ambiguous entity related to answer by asking a new question. \
+        Generate an additional question about ambiguous entity to help to answer the original question correctly.  \
+        Original question: " + item['question'] + " " + \
+        "Ambiguous entity: " + item['ambiguous_object'] + " " + \
+        "Additional question: "
         encoding["text"] = question
         
         return encoding

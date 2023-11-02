@@ -7,6 +7,7 @@ from torch.utils.data import DataLoader
 
 from transformers import Blip2Processor, Blip2ForConditionalGeneration
 from dataset import ImageTextGenerationDataset
+from utils import convert_inputs_to_examples
 
 
 device = "cuda" if torch.cuda.is_available() else "cpu"
@@ -62,13 +63,14 @@ def main():
     # unanswerable question and uncertain_information(object)
     samples = [
         {"question" : "Why did Dokyung go to the old man?",
-         "uncertain_information" : "man",
+         "uncertain_information" : [{"['old','man']" : False}],
          "vid" : "AnotherMissOh17_001_0000"
         },
     ]
     
+    examples = convert_inputs_to_examples(samples)
     
-    test_dataset = ImageTextGenerationDataset(args, samples, processor)
+    test_dataset = ImageTextGenerationDataset(args, examples, processor)
     test_dataloader = DataLoader(test_dataset, shuffle=False, batch_size=1, collate_fn=test_dataset.collate_fn)
     
     device = "cuda" if torch.cuda.is_available() else "cpu"
@@ -82,7 +84,7 @@ def main():
         
         inputs = move_to(batch, device)
         
-        outputs = model.generate(**inputs, max_new_tokens=20)
+        outputs = model.generate(**inputs, max_new_tokens=20, num_beams=4)
         
         additional_questions = processor.batch_decode(outputs, skip_special_tokens=True)
         
