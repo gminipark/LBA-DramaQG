@@ -41,14 +41,14 @@ python run_inference.py --cache_dir="./blip2-flan-t5-xxl" --image_dir="./data/An
 ```
 [
     {"question" : "Why did Dokyung go to the old man?",
-     "uncertain_information" : "man",
+     "uncertain_information" : [{"['old','man']" : False}],
      "vid" : "AnotherMissOh17_001_0000"
     },
 ]
 ```
 ## Output example
 ```
-["What is the man's name?"]
+['What does the old man look like?']
 ```
 
  ### Contact
