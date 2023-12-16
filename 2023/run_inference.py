@@ -39,13 +39,39 @@ def get_processor(args):
     
     return processor
 
+def get_decoding_strategy(strategy_name):
+    
+    
+    if strategy_name == "greedy":
+        parameters = {"max_new_tokens" : 20}
+        
+    elif strategy_name == "beam":
+        parameters = {"max_new_tokens" : 20,
+                      "num_beams" : 4}
+        
+    elif strategy_name == "constrastive":
+        parameters = {"max_new_tokens" : 20,
+                      "penalty_alpha" : 0.6,
+                      "top_k":4}
+        
+    elif strategy_name == "diverse":
+        parameters = {"max_new_tokens" : 20,
+                      "num_beams" : 4, 
+                      "num_beam_groups" : 4,
+                      "diversity_penalty" : 1.0}
+        
+    elif strategy_name == "sample":
+        parameters = {"max_new_tokens" : 20,
+                      "do_sample" : True}
+    return parameters
 def add_args(parser):
     
     parser.add_argument("--model_name_or_path", type=str, default="Salesforce/blip2-flan-t5-xxl")
     parser.add_argument("--processer_name_or_path", type=str)
     parser.add_argument("--cache_dir", type=str)
-    
     parser.add_argument("--image_dir", type=str, required=True)
+    parser.add_argument("--prompt_type", default='0', choices=['0', '1', '2'])
+    parser.add_argument("--decoding_strategy",default='beam', choices=['greedy', 'beam', 'constrastive', 'diverse', 'sample'])
     
     return parser
 
@@ -84,7 +110,11 @@ def main():
         
         inputs = move_to(batch, device)
         
-        outputs = model.generate(**inputs, max_new_tokens=20, num_beams=4)
+        outputs = []
+        
+        parameters = get_decoding_strategy(args.decoding_strategy)
+        
+        outputs += model.generate(**inputs, **parameters)
         
         additional_questions = processor.batch_decode(outputs, skip_special_tokens=True)
         

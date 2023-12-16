@@ -6,6 +6,25 @@ from PIL import Image
 from image_utils import get_image_from_vid
 
 
+prompts = {"0" : "Instructions: Given a picture, a question and a ambiguous entity of the question are provided.\
+        An answer can not be inferred by the ambiguous entity. \
+        The ambiguous entity(object) of question  which is existed in the picture is important key to infer the answer. \
+        The additional information of the ambiguous entity  is helpful for answer the question more correctly. \
+        Therefore, our goal is to get new information about the ambiguous entity related to answer by asking a new question. \
+        Generate an additional question about ambiguous entity to help to answer the original question correctly. " ,
+        "1" : "Instructions: Given a picture, a question and a ambiguous entity of the question are provided.\
+        An answer can not be inferred by the ambiguous entity. \
+        The ambiguous entity(object) of question  which is existed in the picture is important key to infer the answer. \
+        The additional information of the ambiguous entity  is helpful for answer the question more correctly. \
+        Therefore, our goal is to get new information about the ambiguous entity related to answer by asking a new question. \
+        Generate an additional question about the location of the ambiguous entity to help to answer the original question correctly. ",
+        "2" : "Instructions: Given a picture, a question and a ambiguous entity of the question are provided.\
+        An answer can not be inferred by the ambiguous entity. \
+        The ambiguous entity(object) of question  which is existed in the picture is important key to infer the answer. \
+        The additional information of the ambiguous entity  is helpful for answer the question more correctly. \
+        Therefore, our goal is to get new information about the ambiguous entity related to answer by asking a new question. \
+        Generate an additional question about an attribute of the ambiguous entity to help to answer the original question correctly. "}
+
 class ImageTextGenerationDataset(Dataset):
     def __init__(self, args, examples, processor):
         self.args = args
@@ -26,13 +45,8 @@ class ImageTextGenerationDataset(Dataset):
         # remove batch dimension
         encoding = {k: v.squeeze() for k, v in encoding.items()}
         
-        question = "Instructions: Given a picture, a question and a ambiguous entity of the question are provided.\
-        An answer can not be inferred by the ambiguous entity. \
-        The ambiguous entity(object) of question  which is existed in the picture is important key to infer the answer. \
-        The additional information of the ambiguous entity  is helpful for answer the question more correctly. \
-        Therefore, our goal is to get new information about the ambiguous entity related to answer by asking a new question. \
-        Generate an additional question about ambiguous entity to help to answer the original question correctly.  \
-        Original question: " + item['question'] + " " + \
+        question = prompts[self.args.prompt_type] + \
+        "Original question: " + item['question'] + " " + \
         "Ambiguous entity: " + item['ambiguous_object'] + " " + \
         "Additional question: "
         encoding["text"] = question
