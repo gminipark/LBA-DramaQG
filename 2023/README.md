@@ -32,9 +32,18 @@ LBA-DramaQG/
                 
 
 ```
-1. Generation
+3. Generation
 ```
 python run_inference.py --cache_dir="./blip2-flan-t5-xxl" --image_dir="./data/AnotherMissOh/AnotherMissOh_images/"
+```
+
+3-1. Diverse Question Generation
+- prompt_type과 decoding_strategy를 통해 같은 입력에서 다양한 질문 생성가능
+ - prompt_type = ["0", "1", "2"]
+ - decoding_strategy = ["greedy", "beam", "constrastive", "diverse", "sample"]
+
+```
+python run_inference.py --cache_dir="./blip2-flan-t5-xxl" --image_dir="./data/AnotherMissOh/AnotherMissOh_images/" --prompt_type=2
 ```
 
 ## Input example 
