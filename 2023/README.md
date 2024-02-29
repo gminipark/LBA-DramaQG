@@ -34,8 +34,10 @@ LBA-DramaQG/
 ```
 3. Generation
 ```
-python run_inference.py --cache_dir="./blip2-flan-t5-xxl" --image_dir="./data/AnotherMissOh/AnotherMissOh_images/"
+python run_inference.py --cache_dir="./blip2-flan-t5-xxl" --image_dir="./data/AnotherMissOh/AnotherMissOh_images/" --input_path="input json file path" --output_path="output json file path"
 ```
+- input_path: 입력 json 파일 경로
+- output_path: 출력 json 파일 경로
 
 3-1. Diverse Question Generation
 - prompt_type과 decoding_strategy를 통해 같은 입력에서 다양한 질문 생성가능
@@ -46,18 +48,38 @@ python run_inference.py --cache_dir="./blip2-flan-t5-xxl" --image_dir="./data/An
 python run_inference.py --cache_dir="./blip2-flan-t5-xxl" --image_dir="./data/AnotherMissOh/AnotherMissOh_images/" --prompt_type=2
 ```
 
-## Input example 
+## Input json example 
 ```
 [
-    {"question" : "Why did Dokyung go to the old man?",
-     "uncertain_information" : [{"['old','man']" : False}],
-     "vid" : "AnotherMissOh17_001_0000"
+    {
+        "qid": 3205,
+        "question": "How is the relationship between Haeyoung1 and Dokyung when the two hug and kiss each other?",
+        "answerability": [
+            "unanswerable"
+        ],
+        "prediction": [
+            {
+                "['relationship']": false
+            }
+        ],
+        "vid": "AnotherMissOh14_001_0000"
     },
+    ...
 ]
 ```
-## Output example
+## Output json example
 ```
-['What does the old man look like?']
+[
+    {
+        "qid": 3205,
+        "vid": "AnotherMissOh14_001_0000",
+        "main_question": "How is the relationship between Haeyoung1 and Dokyung when the two hug and kiss each other?",
+        "sub_questions": [
+            "What is the relationship between Haeyoung1 and Dokyung?"
+        ]
+    },
+    ...
+]
 ```
 
  ### Contact
