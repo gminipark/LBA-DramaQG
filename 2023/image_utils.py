@@ -12,7 +12,7 @@ def get_image_from_vid(image_dir, vid):
         image_list = glob(image_path, recursive=True)
     
     else:
-        image_path = os.path.join(image_dir, f"/AnotherMissOh{episode_id}/{scene_id}/{shot_id}/*.jpg")
+        image_path = os.path.join(image_dir, f"AnotherMissOh{episode_id}/{scene_id}/{shot_id}/*.jpg")
         image_list = glob(image_path)
     
     return image_list
