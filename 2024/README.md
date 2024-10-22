@@ -15,10 +15,10 @@ git clone https://github.com/gminipark/LBA-DramaQG.git
 
 2. 필요한 라이브러리 설치와 모델을 다운로드 받습니다.
 
-'''
+```
 bash init.sh
-'''
 
+```
 링크: [link](http://gofile.me/5YLyZ/MgHW975A)
 
 3. DramaQA 이미지 데이터셋을 다운로드 받아서 아래와 같이 디렉토리를 준비해주세요,
