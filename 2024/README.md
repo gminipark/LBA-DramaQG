@@ -10,10 +10,18 @@
 
 ```
 git clone https://github.com/gminipark/LBA-DramaQG.git
-pip install -r requirements.txt
+
 ```
 
-2. DramaQA 이미지 데이터셋을 다운로드 받아서 아래와 같이 디렉토리를 준비해주세요,
+2. 필요한 라이브러리 설치와 모델을 다운로드 받습니다.
+
+'''
+bash init.sh
+'''
+
+링크: [link](http://gofile.me/5YLyZ/MgHW975A)
+
+3. DramaQA 이미지 데이터셋을 다운로드 받아서 아래와 같이 디렉토리를 준비해주세요,
 
 ```
 LBA-DramaQG/
@@ -31,28 +39,27 @@ LBA-DramaQG/
   		    /AnotherMissOh_images
 		        /AnotherMissOh01
 			        /001
+                        ...
                         	...
-                            	...
 
 ```
 
-3. Generation
+4. Generation
 
 ```
-python run_inference.py --model_name_or_path=llava-hf/LLaVA-NeXT-Video-7B-hf --video_dir="./data/AnotherMissOh/AnotherMissOh_images/" --input_path="input json file path" --output_path="output json file path"
+CUDA_VISIBLE_DEVICES=0 python run_inference.py --model_path=llava-checkpoint --video_dir="./data/AnotherMissOh/AnotherMissOh_images/" --input_file=input_sample.json --output_dir=./ --output_name=output_sample.json                       
 ```
 
 - input_path: 입력 json 파일 경로
 - output_path: 출력 json 파일 경로
 
-3-1. Diverse Question Generation
+4-1. Diverse Question Generation
 
-- prompt_type과 decoding_strategy를 통해 같은 입력에서 다양한 질문 생성가능
-- prompt_type = ["0", "1", "2"]
-- decoding_strategy = ["greedy", "beam", "constrastive", "diverse", "sample"]
+- decoding_strategy를 통해 같은 입력에서 다양한 질문 생성가능
+- decoding_strategy = ["greedy", "sample"]
 
 ```
-python run_inference.py --cache_dir="./LLaVA-NeXT-Video-7B-hf" --video_dir="./data/AnotherMissOh/AnotherMissOh_images/" --decoding_strategy sample
+CUDA_VISIBLE_DEVICES=0 python run_inference.py --model_path=llava-checkpoint --video_dir="./data/AnotherMissOh/AnotherMissOh_images/" --input_file=input_sample.json --output_dir=./ --output_name=output_sample.json --decoding_strategy sample
 ```
 
 ## Input json example
@@ -62,14 +69,8 @@ python run_inference.py --cache_dir="./LLaVA-NeXT-Video-7B-hf" --video_dir="./da
     {
         "qid": 3205,
         "question": "How is the relationship between Haeyoung1 and Dokyung when the two hug and kiss each other?",
-        "answerability": [
-            "unanswerable"
-        ],
-        "prediction": [
-            {
-                "['relationship']": false
-            }
-        ],
+        "answerable": "no",
+        "reasoning": "Dokyung",
         "vid": "AnotherMissOh14_001_0000"
     },
     ...
@@ -82,11 +83,11 @@ python run_inference.py --cache_dir="./LLaVA-NeXT-Video-7B-hf" --video_dir="./da
 [
     {
         "qid": 3205,
+        "question": "How is the relationship between Haeyoung1 and Dokyung when the two hug and kiss each other?",
+        "answerable": "no",
+        "reasoning": "Dokyung",
         "vid": "AnotherMissOh14_001_0000",
-        "main_question": "How is the relationship between Haeyoung1 and Dokyung when the two hug and kiss each other?",
-        "sub_questions": [
-            "Can you provide more context about the relationship between Haeyoung1 and Dokyung in the scene where they are hugging and kissing each other? Are they friends, family members, or a romantic couple?"
-        ]
+        "pred": What is Dokyung doing?
     },
     ...
 ]
