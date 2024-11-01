@@ -1,0 +1,27 @@
+[
+    {
+        "qid": 3205,
+        "vid": "AnotherMissOh14_001_0000",
+        "main_question": "How is the relationship between Haeyoung1 and Dokyung when the two hug and kiss each other?",
+        "sub_questions": [
+            "What is the relationship between Haeyoung1 and Dokyung?"
+        ]
+    },
+    {
+        "qid": 3200,
+        "vid": "AnotherMissOh14_001_0000",
+        "main_question": "Why did Haeyoung1 lean against the wall when Haeyoung1 was walking in the alley with Dokyung?",
+        "sub_questions": [
+            "What kind of wall is Haeyoung1 leaning against?",
+            "What kind of alley is this?"
+        ]
+    },
+    {
+        "qid": 3197,
+        "vid": "AnotherMissOh14_001_0000",
+        "main_question": "Why did Haeyoung1 say that Dokyung is a drug?",
+        "sub_questions": [
+            "What kind of drug did Haeyoung1 say that Dokyung is?"
+        ]
+    }
+]

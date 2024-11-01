@@ -1,0 +1,27 @@
+[
+    {
+        "qid": 3205,
+        "vid": "AnotherMissOh14_001_0000",
+        "main_question": "How is the relationship between Haeyoung1 and Dokyung when the two hug and kiss each other?",
+        "sub_questions": [
+            "Can you provide more context about the relationship between Haeyoung1 and Dokyung in the scene where they are hugging and kissing each other? Are they friends, family members, or a romantic couple?"
+        ]
+    },
+    {
+        "qid": 3200,
+        "vid": "AnotherMissOh14_001_0000",
+        "main_question": "Why did Haeyoung1 lean against the wall when Haeyoung1 was walking in the alley with Dokyung?",
+        "sub_questions": [
+            "Can you describe the surroundings of the alley where Haeyoung1 was walking with Dokyung?",
+            "Can you describe the surroundings of the alley where Haeyoung1 was walking with Dokyung?"
+        ]
+    },
+    {
+        "qid": 3197,
+        "vid": "AnotherMissOh14_001_0000",
+        "main_question": "Why did Haeyoung1 say that Dokyung is a drug?",
+        "sub_questions": [
+            "Can you provide more context or details about the scene in the picture that might help clarify why Haeyoung1 accused Dokyung of being a drug?"
+        ]
+    }
+]

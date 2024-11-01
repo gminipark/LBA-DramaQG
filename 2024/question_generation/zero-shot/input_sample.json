@@ -1,0 +1,77 @@
+[
+    {
+        "qid": 3205,
+        "question": "How is the relationship between Haeyoung1 and Dokyung when the two hug and kiss each other?",
+        "answerability": [
+            "unanswerable"
+        ],
+        "prediction": [
+            {
+                "['relationship']": false
+            }
+        ],
+        "vid": "AnotherMissOh14_001_0000"
+    },
+    {
+        "qid": 3200,
+        "question": "Why did Haeyoung1 lean against the wall when Haeyoung1 was walking in the alley with Dokyung?",
+        "answerability": [
+            "unanswerable"
+        ],
+        "prediction": [
+            {
+                "['wall']": false,
+                "['alley']": false
+            }
+        ],
+        "vid": "AnotherMissOh14_001_0000"
+    },
+    {
+        "qid": 3197,
+        "question": "Why did Haeyoung1 say that Dokyung is a drug?",
+        "answerability": [
+            "unanswerable"
+        ],
+        "prediction": [
+            {
+                "['drug']": false
+            }
+        ],
+        "vid": "AnotherMissOh14_001_0000"
+    },
+    {
+        "qid": 8776,
+        "question": "What did Dokyung and Haeyoung1 do when Dokyung and Haeyoung1 walked in the street?",
+        "answerability": [
+            "unanswerable"
+        ],
+        "prediction": [
+            {
+                "['street']": false
+            }
+        ],
+        "vid": "AnotherMissOh14_001_0000"
+    },
+    {
+        "qid": 3201,
+        "question": "How did Haeyoung1 feel when Haeyoung1 was with Dokyung?",
+        "answerability": [
+            "answerable"
+        ],
+        "prediction": [],
+        "vid": "AnotherMissOh14_001_0000"
+    },
+    {
+        "qid": 9919067,
+        "question": "What is the relationship between Haeyoung1 and Dokyung?",
+        "answerability": [
+            "answerable"
+        ],
+        "prediction": [
+            {
+                "['relationship']": true
+            }
+        ],
+        "vid": "AnotherMissOh14_001_0025"
+    }
+]
